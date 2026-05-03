@@ -3,9 +3,16 @@ from datetime import datetime
 import google.generativeai as genai
 
 # APIキーの設定
-# 注意: APIキーを直接書くとGitHub公開時に危険なため、本来は st.secrets 推奨です
-genai.configure(api_key="AIzaSyBadkCUK12PZ4h6ChGfCtmn0XWSmwF7F2I")
-model = genai.GenerativeModel('gemini-1.5-flash')
+try:
+    # モデル名を 'models/gemini-1.5-flash' とフルネームで指定
+    model = genai.GenerativeModel('models/gemini-1.5-flash')
+    
+    # 疎通確認（これ自体がエラーになればライブラリかキーの問題）
+    response = model.generate_content("test", generation_config={"max_output_tokens": 1})
+except Exception as e:
+    # 1.5-flashがダメな場合、より安定している1.0-proを試す
+    st.warning("Gemini 1.5 Flashの起動に失敗しました。1.0 Proに切り替えます。")
+    model = genai.GenerativeModel('gemini-1.0-pro')
 
 st.set_page_config(page_title="行動決定型占い", layout="centered")
 st.title("🔮 迷いを行動に変える 占い（AI鑑定版）")
