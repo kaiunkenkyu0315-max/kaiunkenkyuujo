@@ -1,17 +1,20 @@
 import streamlit as st
-import google.generativeai as genai
+from google import genai  # 新しいインポート方法
 
-# あなたの最新のAPIキーに書き換えてください
-genai.configure(api_key="最新のAPIキーをここに貼る")
+# APIキーの設定（最新版の書き方）
+client = genai.Client(api_key="AIzaSyBadkCUK12PZ4h6ChGfCtmn0XWSmwF7F2I")
 
-st.title("Gemini 接続テスト")
+st.title("🔮 占い（最新版SDK）")
 
-# あえてモデル名から 'models/' を外した最も標準的な書き方
-try:
-    model = genai.GenerativeModel('gemini-1.5-flash')
-    response = model.generate_content("Hello, how are you?")
-    st.success("成功！Gemini 1.5 Flash は正常に動いています。")
-    st.write(response.text)
-except Exception as e:
-    st.error(f"エラーが発生しました: {e}")
-    st.info("このエラーが出る場合、サーバー側のライブラリ更新が反映されていません。")
+# （中略：ユーザー入力部分などはそのまま）
+
+if st.button("占う"):
+    try:
+        # 最新の呼び出しメソッド
+        response = client.models.generate_content(
+            model="gemini-2.0-flash", # 最新モデルも使えます
+            contents=f"悩み: {issue}, 状況: {situation} を占って"
+        )
+        st.markdown(response.text)
+    except Exception as e:
+        st.error(f"エラーが発生しました: {e}")
