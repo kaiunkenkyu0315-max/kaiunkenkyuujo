@@ -6,8 +6,7 @@ st.set_page_config(page_title="行動決定型占い", layout="centered")
 st.title("🔮 迷いを行動に変える 無料占い")
 
 # === Gemini API設定（ここにあなたのAPIキーを入れる）===
-genai.configure(api_key="AIzaSyDfABeDgcXy7-qID_2TMJFB24FeD0QSmSQ")  # ← ここを自分のキーに変更
-
+genai.configure(api_key=st.secrets["AIzaSyDfABeDgcXy7-qID_2TMJFB24FeD0QSmSQ"])  # Streamlit Secretsを使う方法（おすすめ）
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 # ユーザーID
