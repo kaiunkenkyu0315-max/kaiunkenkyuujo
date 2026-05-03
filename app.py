@@ -31,29 +31,17 @@ if st.button("占う", type="primary"):
     else:
         with st.spinner("AIが鑑定中..."):
             try:
-                # 最新のSDK（google-genai）での呼び出し方法
+                # プロンプトの作成
                 prompt = f"""
                 あなたは凄腕の占い師です。以下の悩みを持つユーザーに対して、
                 「今の状態」「1つの警告」「1つの具体的な行動」の3点を鑑定してください。
 
                 【悩み】: {issue}
                 【状況】: {situation}
-
-                形式:
-                ### 鑑定結果
-                **【今の状態】**
-                (ここに鑑定結果)
-                **【1つの警告】**
-                (ここに厳しい警告)
-                **【1つの行動】**
-                (今日からできる具体的な一歩)
                 """
 
-                # モデルには gemini-1.5-flash を指定
-                response = client.models.generate_content(
-                    model="gemini-1.5-flash-8b",
-                    contents=prompt
-                )
+                # 修正ポイント：'client.models.generate_content' ではなく 'model.generate_content' を使う
+                response = model.generate_content(prompt)
                 result = response.text
 
                 st.markdown(result)
