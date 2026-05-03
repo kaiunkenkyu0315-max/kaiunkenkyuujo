@@ -60,7 +60,7 @@ if st.button("占う", type="primary"):
 
                 # 生成の実行 (モデル名を最新のものに固定)
                 response = client.models.generate_content(
-                    model="gemini-1.5-flash", 
+                    model="gemini-1.5-pro", 
                     contents=prompt
                 )
                 result = response.text
