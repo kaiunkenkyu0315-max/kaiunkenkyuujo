@@ -47,9 +47,9 @@ if st.button("占う", type="primary"):
                 (今日からできる具体的な一歩)
                 """
 
-                # モデルには最新の gemini-2.0-flash を指定
+                # モデルには gemini-1.5-flash を指定
                 response = client.models.generate_content(
-                    model="gemini-2.0-flash",
+                    model="gemini-1.5-flash",
                     contents=prompt
                 )
                 result = response.text
