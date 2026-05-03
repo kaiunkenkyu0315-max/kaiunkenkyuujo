@@ -5,8 +5,13 @@ import google.generativeai as genai
 st.set_page_config(page_title="行動決定型占い", layout="centered")
 st.title("🔮 迷いを行動に変える 無料占い")
 
+# === Gemini API設定（簡易直接入力版）===
+import google.generativeai as genai
+
 # === Gemini API設定（ここにあなたのAPIキーを入れる）===
-genai.configure(api_key=st.secrets["AIzaSyDfABeDgcXy7-qID_2TMJFB24FeD0QSmSQ"])  # Streamlit Secretsを使う方法（おすすめ）
+GEMINI_API_KEY = "AIzaSyDfABeDgcXy7-qID_2TMJFB24FeD0QSmSQ"   # ← あなたの実際のキー全体を入れる
+
+genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 # ユーザーID
