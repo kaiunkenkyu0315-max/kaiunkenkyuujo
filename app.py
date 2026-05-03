@@ -4,7 +4,7 @@ from google import genai  # 新しいSDK
 
 # APIキーの設定
 # ※ GitHub公開時は Streamlit の Secrets 設定を推奨します
-client = genai.Client(api_key="AIzaSyAtNKPhk2UfOCmG-H9zMNQ_LNHHkNsBCYE")
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 st.set_page_config(page_title="行動決定型占い", layout="centered")
 st.title("🔮 迷いを行動に変える 無料占い")
